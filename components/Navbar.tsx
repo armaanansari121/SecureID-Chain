@@ -1,6 +1,8 @@
 "use client";
+import { client } from "@/app/web3/client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ConnectButton } from "thirdweb/react";
 
 const Navbar: React.FC = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -28,7 +30,7 @@ const Navbar: React.FC = () => {
           <Link href="/" className="text-2xl font-bold">
             SecureID Chain
           </Link>
-          <div className="space-x-4">
+          <div className="space-x-4 flex items-center">
             <Link href="/employees" className="hover:text-gray-300">
               Employees
             </Link>
@@ -44,6 +46,7 @@ const Navbar: React.FC = () => {
             <Link href="/dashboard" className="hover:text-gray-300">
               Dashboard
             </Link>
+            <ConnectButton client={client} theme={"light"} />
           </div>
         </div>
       </div>
