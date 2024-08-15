@@ -11,23 +11,22 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import { roleManagerContract } from "../web3/client";
+import { idManagementContract } from "../web3/client";
 import { prepareContractCall } from "thirdweb";
 import { useSendTransaction } from "thirdweb/react";
 
 const roles = [
-  { label: "HR", value: "HR_ROLE" },
+  {
+    label: "HR",
+    value: "HR_ROLE",
+  },
   {
     label: "Manager",
     value: "MANAGER_ROLE",
   },
   {
-    label: "Driver",
-    value: "DRIVER_ROLE",
-  },
-  {
-    label: "Warehouse",
-    value: "WAREHOUSE_ROLE",
+    label: "Admin",
+    value: "ADMIN_ROLE",
   },
 ];
 
@@ -41,11 +40,20 @@ const RolesPage: FC = () => {
   const handleGrantRole = (e: any) => {
     e.preventDefault();
     const transaction = prepareContractCall({
-      contract: roleManagerContract,
-      method: "function grantRole(bytes32 role, address account)",
+      contract: idManagementContract,
+      method: "function addRole(string role, address account)",
       params: [grantRole, grantAddress],
     });
-    console.log(transaction);
+    sendTransaction(transaction);
+  };
+
+  const handleRevokeRole = (e: any) => {
+    e.preventDefault();
+    const transaction = prepareContractCall({
+      contract: idManagementContract,
+      method: "function removeRole(string role, address account)",
+      params: [revokeRole, revokeAddress],
+    });
     sendTransaction(transaction);
   };
 
@@ -92,7 +100,7 @@ const RolesPage: FC = () => {
           </form>
         </Card>
         <Card className="w-1/2 p-6">
-          <form>
+          <form onSubmit={handleRevokeRole}>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
                 Revoke Role
