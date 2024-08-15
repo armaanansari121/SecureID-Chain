@@ -11,9 +11,6 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import { idManagementContract } from "../web3/client";
-import { prepareContractCall } from "thirdweb";
-import { useSendTransaction } from "thirdweb/react";
 
 const roles = [
   {
