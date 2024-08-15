@@ -8,7 +8,7 @@ export const client = createThirdwebClient({
 export const idManagementContract = getContract({
   client,
   chain: defineChain(11155111),
-  address: "0xB6165232ca39F349Bdf9050F03a99bC641ce257f",
+  address: "0xc9151C5B8454082e6915D8F3f25b3B1C0818e327",
 });
 
 export const checkpointManagerContract = getContract({

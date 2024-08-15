@@ -6,17 +6,10 @@ import { Button } from "@/components/ui/button";
 import ParallaxSection from "@/components/ParallaxSection";
 import CarouselSection from "./CarouselSection";
 
+
 const Home: NextPage = () => {
   return (
     <div className="bg-gradient-to-r from-blue-500 to-purple-600">
-      <Head>
-        <title>SecureID Chain - Blockchain-Based ID Card System</title>
-        <meta
-          name="description"
-          content="Secure, immutable, and decentralized identity management"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
 
       <main>
         <ParallaxSection>
