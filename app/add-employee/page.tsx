@@ -11,9 +11,8 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import { idManagementContract } from "../web3/client";
-import { prepareContractCall } from "thirdweb";
-import { useSendTransaction } from "thirdweb/react";
+import { useContract } from "../_contexts";
+// import Web3 from "web3";
 
 const roles = [
   {
@@ -27,22 +26,30 @@ const roles = [
 ];
 
 const RolesPage: FC = () => {
-  const { mutate: sendTransaction } = useSendTransaction();
+  const { IdContract, account } = useContract();
+  console.log(IdContract);
   const [employeeName, setEmployeeName] = useState<string>("");
   const [employeeRole, setEmployeeRole] = useState<string>("");
   const [employeeAddress, setEmployeeAddress] = useState<string>("");
   const [employeeIpfs, setEmployeeIpfs] = useState<string>("");
 
-  const handleAddEmployee = (e: any) => {
+  const handleAddEmployee = async (e: any) => {
     e.preventDefault();
-    console.log(employeeName, employeeAddress, employeeRole, employeeIpfs);
-    const transaction = prepareContractCall({
-      contract: idManagementContract,
-      method:
-        "function addEmployee(string _name, string _role, address _employeeAddress, string _imageIpfs)",
-      params: [employeeName, employeeRole, employeeAddress, employeeIpfs],
-    });
-    sendTransaction(transaction);
+
+    if (!IdContract || !account) {
+      console.error("Contract or account not available");
+      return;
+    }
+
+    try {
+      const transaction = await IdContract.methods
+        .addEmployee(employeeName, employeeRole, employeeAddress, employeeIpfs)
+        .send({ from: account });
+
+      console.log("Employee added successfully:", transaction);
+    } catch (error) {
+      console.error("Error adding employee:", error);
+    }
   };
 
   return (

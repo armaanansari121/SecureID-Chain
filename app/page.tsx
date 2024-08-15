@@ -7,10 +7,14 @@ import ParallaxSection from "@/components/ParallaxSection";
 import CarouselSection from "./CarouselSection";
 
 
+
+
 const Home: NextPage = () => {
+
+
+
   return (
     <div className="bg-gradient-to-r from-blue-500 to-purple-600">
-
       <main>
         <ParallaxSection>
           <div className="text-center text-white">

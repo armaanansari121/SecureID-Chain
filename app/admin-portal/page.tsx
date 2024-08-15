@@ -11,6 +11,7 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
+import { useContract } from "../_contexts";
 
 const roles = [
   {
@@ -28,30 +29,48 @@ const roles = [
 ];
 
 const RolesPage: FC = () => {
-  const { mutate: sendTransaction } = useSendTransaction();
+  const { IdContract, account } = useContract();
   const [grantRole, setGrantRole] = useState<string>("");
   const [revokeRole, setRevokeRole] = useState<string>("");
   const [grantAddress, setGrantAddress] = useState<string>("");
   const [revokeAddress, setRevokeAddress] = useState<string>("");
 
-  const handleGrantRole = (e: any) => {
+  const handleGrantRole = async (e: any) => {
     e.preventDefault();
-    const transaction = prepareContractCall({
-      contract: idManagementContract,
-      method: "function addRole(string role, address account)",
-      params: [grantRole, grantAddress],
-    });
-    sendTransaction(transaction);
+
+    if (!IdContract || !account) {
+      console.error("Contract or account not available");
+      return;
+    }
+
+    try {
+      const transaction = await IdContract.methods
+        .addRole(grantRole, grantAddress)
+        .send({ from: account });
+
+      console.log("Role granted successfully:", transaction);
+    } catch (error) {
+      console.error("Error granting role:", error);
+    }
   };
 
-  const handleRevokeRole = (e: any) => {
+  const handleRevokeRole = async (e: any) => {
     e.preventDefault();
-    const transaction = prepareContractCall({
-      contract: idManagementContract,
-      method: "function removeRole(string role, address account)",
-      params: [revokeRole, revokeAddress],
-    });
-    sendTransaction(transaction);
+
+    if (!IdContract || !account) {
+      console.error("Contract or account not available");
+      return;
+    }
+
+    try {
+      const transaction = await IdContract.methods
+        .removeRole(revokeRole, revokeAddress)
+        .send({ from: account });
+
+      console.log("Role revoked successfully:", transaction);
+    } catch (error) {
+      console.error("Error revoking role:", error);
+    }
   };
 
   return (
@@ -127,7 +146,9 @@ const RolesPage: FC = () => {
                 className="mt-1 block w-full"
               />
             </div>
-            <Button className="mt-4 w-full">Revoke Role</Button>
+            <Button className="mt-4 w-full" type="submit">
+              Revoke Role
+            </Button>
           </form>
         </Card>
       </div>

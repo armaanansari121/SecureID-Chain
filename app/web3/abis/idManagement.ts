@@ -1,4 +1,4 @@
-[
+export const IDManagement_ABI=[
   {
     "inputs": [],
     "stateMutability": "nonpayable",
