@@ -11,19 +11,43 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
+import { roleManagerContract } from "../web3/client";
+import { prepareContractCall } from "thirdweb";
+import { useSendTransaction } from "thirdweb/react";
 
 const roles = [
   { label: "HR", value: "HR_ROLE" },
-  { label: "Manager", value: "MANAGER_ROLE" },
-  { label: "Driver", value: "DRIVER_ROLE" },
-  { label: "Warehouse", value: "WAREHOUSE_ROLE" },
+  {
+    label: "Manager",
+    value: "MANAGER_ROLE",
+  },
+  {
+    label: "Driver",
+    value: "DRIVER_ROLE",
+  },
+  {
+    label: "Warehouse",
+    value: "WAREHOUSE_ROLE",
+  },
 ];
 
 const RolesPage: FC = () => {
+  const { mutate: sendTransaction } = useSendTransaction();
   const [grantRole, setGrantRole] = useState<string>("");
   const [revokeRole, setRevokeRole] = useState<string>("");
   const [grantAddress, setGrantAddress] = useState<string>("");
   const [revokeAddress, setRevokeAddress] = useState<string>("");
+
+  const handleGrantRole = (e: any) => {
+    e.preventDefault();
+    const transaction = prepareContractCall({
+      contract: roleManagerContract,
+      method: "function grantRole(bytes32 role, address account)",
+      params: [grantRole, grantAddress],
+    });
+    console.log(transaction);
+    sendTransaction(transaction);
+  };
 
   return (
     <div className="container mx-auto py-8">
@@ -32,7 +56,7 @@ const RolesPage: FC = () => {
       </h1>
       <div className="flex space-x-4">
         <Card className="w-1/2 p-6">
-          <form>
+          <form onSubmit={handleGrantRole}>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
                 Grant Role
@@ -62,7 +86,9 @@ const RolesPage: FC = () => {
                 className="mt-1 block w-full"
               />
             </div>
-            <Button className="mt-4 w-full">Grant Role</Button>
+            <Button className="mt-4 w-full" type="submit">
+              Grant Role
+            </Button>
           </form>
         </Card>
         <Card className="w-1/2 p-6">
