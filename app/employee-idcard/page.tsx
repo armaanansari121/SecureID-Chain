@@ -15,9 +15,10 @@ const EmployeeProfile: NextPage = () => {
     contract: idManagementContract,
     method:
       "function getEmployee(address _employeeAddress) view returns ((string name, string role, bool active, uint256 lastUpdated, string[] certifications, string ipfsHash, (string latitude, string longitude, uint256 timestamp, uint256 checkpointId)[] locationHistory))",
-    params: [account.address],
+    params: [account?.address],
   });
-  if (isLoading) return null;
+  console.log(account);
+  console.log(isLoading);
   console.log(data);
   return (
     <div className="bg-gradient-to-r from-blue-500 to-purple-600 min-h-screen pt-24">
