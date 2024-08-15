@@ -5,8 +5,20 @@ import Head from "next/head";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useActiveAccount, useReadContract } from "thirdweb/react";
+import { idManagementContract } from "../web3/client";
+import { Account } from "thirdweb/wallets";
 
 const EmployeeProfile: NextPage = () => {
+  const account = useActiveAccount() as Account;
+  const { data, isLoading } = useReadContract({
+    contract: idManagementContract,
+    method:
+      "function getEmployee(address _employeeAddress) view returns ((string name, string role, bool active, uint256 lastUpdated, string[] certifications, string ipfsHash, (string latitude, string longitude, uint256 timestamp, uint256 checkpointId)[] locationHistory))",
+    params: [account.address],
+  });
+  if (isLoading) return null;
+  console.log(data);
   return (
     <div className="bg-gradient-to-r from-blue-500 to-purple-600 min-h-screen pt-24">
       <Head>
