@@ -5,8 +5,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Web3 from "web3";
-import { idManagementAddress } from "../web3/client";
-import idManagementABI from "../web3/abis/idManagement.json";
+import { idManagementAddress } from "../../web3/client";
+import idManagementABI from "../../web3/abis/idManagement.json";
 
 const AddCertificationForm: FC = () => {
   const [employeeAddress, setEmployeeAddress] = useState<string>("");

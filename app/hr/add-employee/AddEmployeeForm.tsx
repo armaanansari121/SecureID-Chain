@@ -12,8 +12,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Web3 from "web3";
-import { idManagementAddress } from "../web3/client";
-import idManagementABI from "../web3/abis/idManagement.json";
+import { idManagementAddress } from "../../web3/client";
+import idManagementABI from "../../web3/abis/idManagement.json";
 
 const roles = [
   {

@@ -2,8 +2,8 @@
 
 import { FC, useState, useEffect } from "react";
 import Web3 from "web3";
-import { idManagementAddress } from "../web3/client";
-import idManagementABI from "../web3/abis/idManagement.json";
+import { idManagementAddress } from "../../web3/client";
+import idManagementABI from "../../web3/abis/idManagement.json";
 import Loader from "@/components/Loader";
 import { ethers } from "ethers";
 import { keccak256 } from "ethers"; // Ethers.js keccak256

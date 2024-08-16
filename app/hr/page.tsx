@@ -17,9 +17,9 @@ const AddOptions: FC = () => {
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                 Add Employee
               </h2>
-              <a href="/add-employee" className="inline-block">
+              <a href="/hr/add-employee" className="inline-block">
                 <Button variant="outline" className="bg-blue-600 text-white">
-                  Go to Add Employee
+                  Add Employee
                 </Button>
               </a>
             </div>
@@ -29,9 +29,9 @@ const AddOptions: FC = () => {
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                 Add Certification
               </h2>
-              <a href="/add-certification" className="inline-block">
+              <a href="/hr/add-certification" className="inline-block">
                 <Button variant="outline" className="bg-blue-600 text-white">
-                  Go to Add Certification
+                  Add Certification
                 </Button>
               </a>
             </div>
