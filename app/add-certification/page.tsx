@@ -1,13 +1,13 @@
 "use client";
 
 import { FC, useState, useEffect } from "react";
-import AddEmployeeForm from "./AddEmployeeForm";
 import Web3 from "web3";
 import { idManagementAddress } from "../web3/client";
 import idManagementABI from "../web3/abis/idManagement.json";
 import Loader from "@/components/Loader";
 import { ethers } from "ethers";
 import { keccak256 } from "ethers"; // Ethers.js keccak256
+import AddCertificationForm from "./AddCertificationForm";
 
 const HR_ROLE = keccak256(ethers.toUtf8Bytes("HR_ROLE")); // Hashing the HR_ROLE
 
@@ -66,10 +66,10 @@ const RolesPage: FC = () => {
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-4xl font-semibold text-gray-700 text-center mb-8 mt-24">
-        Add Employee
+        Add Certification
       </h1>
       <div className="flex justify-center">
-        <AddEmployeeForm />
+        <AddCertificationForm />
       </div>
     </div>
   );

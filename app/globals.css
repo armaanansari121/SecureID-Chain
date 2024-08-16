@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom gradient */
+.hover\:border-gradient:hover {
+  border-image-source: linear-gradient(45deg, #00f, #a0f);
+  border-image-slice: 1;
+}
+
+.hover\:bg-gradient:hover {
+  background-image: linear-gradient(45deg, #00f, #a0f);
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -34,20 +34,8 @@ const Navbar: React.FC = () => {
             <Link href="/employee-idcard" className="hover:text-gray-300">
               Employee-Card
             </Link>
-            <Link href="/checkpoints" className="hover:text-gray-300">
-              Checkpoints
-            </Link>
-            <Link href="/admin-portal" className="hover:text-gray-300">
-              Admin
-            </Link>
-            <Link href="/tracking" className="hover:text-gray-300">
-              Tracking
-            </Link>
             <Link href="/dashboard" className="hover:text-gray-300">
               Dashboard
-            </Link>
-            <Link href="/add-employee" className="hover:text-gray-300">
-              Add-Employee
             </Link>
             <ConnectButton client={client} theme={"light"} />
           </div>

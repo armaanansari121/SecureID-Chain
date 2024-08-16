@@ -1,16 +1,20 @@
 // pages/index.tsx
-"use client";
 import { NextPage } from "next";
 import Head from "next/head";
 import { Button } from "@/components/ui/button";
-import ParallaxSection from "@/components/ParallaxSection";
-import CarouselSection from "./CarouselSection";
+import dynamic from "next/dynamic";
 
+// Dynamically import client components to ensure server-side rendering
+const ParallaxSection = dynamic(() => import("@/components/ParallaxSection"), {
+  ssr: false,
+});
+const CarouselSection = dynamic(() => import("./CarouselSection"), {
+  ssr: false,
+});
 
 const Home: NextPage = () => {
   return (
     <div className="bg-gradient-to-r from-blue-500 to-purple-600">
-
       <main>
         <ParallaxSection>
           <div className="text-center text-white">
